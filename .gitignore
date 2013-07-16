@@ -8,3 +8,4 @@
 .cucumber-chef
 .vagrant
 Gemfile.lock
+tmp/*
