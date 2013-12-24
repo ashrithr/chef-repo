@@ -57,10 +57,21 @@ Basic commands:
 3. Create a cookbook structure
 
         knife cookbook create aliases
+        knife cookbook create_specs aliases                         # creates test specs for cookbook specified
 
 4. Upload cookbooks
 
         knife cookbook upload -a
+        knife cookbook upload -o <cookbooks_dirname> --all
+
+5. Install roles on chef-server
+
+        knife role from file roles/*.rb
+
+6. Install environments & nodes on chef-server from workstation
+
+        knife environment from file <env>.json
+        knife node from file "path to JSON file" #from file argument is used to create a node using existing node data as a template.
 
 5. Delete all cookbooks hosted on server
 
@@ -75,6 +86,8 @@ Creating Base node:
         vagrant up --no-color
 
 2. Bootstrap a vagrant node
+
+        knife bootstrap IP_ADDRESS -x ubuntu -i ~/.ssh/id_rsa --sudo
 
         knife bootstrap localhost \
         --ssh-user vagrant \
@@ -116,6 +129,9 @@ Creating Base node:
         knife bootstrap FQDN -x USERNAME --sudo -r 'recipe[ntp]'
         (or)
         knife ssh 'name:webserver01' 'sudo chef-client'
+
+        # run chef client on the new node using ssh
+        knife ssh name:NODENAME -x ubuntu -P PASSWORD "sudo chef-client"
 
 10. Run chef client on all machines using ssh:
 

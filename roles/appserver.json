@@ -1,0 +1,14 @@
+{
+  "json_class": "Chef::Role",
+  "name": "appserver",
+  "description": "Rails application server",
+  "run_list": ["recipe[rails]", "recipe[users]"],
+  "default_attributes": {
+    "users": {
+      "ashrith": {
+        "ssh_keys": { "mupublickey": "a_long_key" },
+        "password": "$1$I1yQ7Mob$ux6wxDtO/FYOg/0dQzypC."
+      }
+    }
+  }
+}

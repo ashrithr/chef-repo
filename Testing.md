@@ -1,10 +1,12 @@
 This repo already comes with all the dependency gems required for testing, such as:
 
-* chefspec - for unit testing and TDD
+* chefspec - for unit testing and TDD (unit testing should test whether messages are sent and recieved correctly)
 * fauxhai - mocks ohai data for chef testing
 * foodcritic - linter fot chef cookbooks
 * strainer - sandboxing and isolation tool for cookbooks
 * gaurd - for watching files and trigger tests
+
+End state of the system is tested with acceptance and integration tests
 
 `bundle install` to install all the dependency gems required for testing
 
@@ -51,4 +53,28 @@ git submodule update --init 2>&1 > /dev/null
 bundle install --quiet
 rm -Rf .colander
 strainer test `echo $JOB_NAME | sed 's/_cookbook//'`
+```
+
+Adding Data bags to chefspec:
+
+```
+require 'chef_spec'
+
+describe 'hostsfile::default' do
+  let(:hosts) { ['1.2.3.4 example.com', '4.5.6.7 bar.com'] }
+
+  before do
+    Chef::Recipe.any_instance.stub(:data_bag).with('etc_hosts').and_return(hosts)
+  end
+
+  let(:runner) { ChefSpec::ChefRunner.new.converge('hostsfile::default') }
+
+  it 'loads the data bag' do
+    Chef::Recipe.any_instance.should_recieve(:data_bag).with('etc_hosts')
+  end
+
+  it 'creates the /etc/hosts template' do
+    expect(runner).to create_template('/etc/hosts').with_content(hosts.join("\n"))
+  end
+end
 ```
