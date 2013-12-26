@@ -1,6 +1,6 @@
 current_dir = File.dirname(__FILE__)
 user = ENV['OPSCODE_USER'] || ENV['USER']
-orgname = ENV['ORGNAME'] || 'cloudwicktech'
+orgname = ENV['ORGNAME'] || 'chef'
 aws_ssh_key = ENV['AWS_SSH_KEY_ID'] || 'ankuscli'
 log_level                :info
 log_location             STDOUT
