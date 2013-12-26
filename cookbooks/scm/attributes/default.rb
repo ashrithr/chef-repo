@@ -24,9 +24,9 @@ case node['platform']
 when "redhat","centos"
   default[:scm][:yumpath] = "/cm4/redhat/#{node['platform_version']}/#{node['kernel']['machine']}/cm/"
 when "ubuntu"
-  default[:scm][:aptpath] = "/cm4/ubuntu/#{node['lsb']['codename']}/#{node['kernel']['machine']}/cm"
+  default[:scm][:aptpath] = "/cm4/ubuntu/#{node['lsb']['codename']}/#{node['kernel']['machine']  =~ /x86_64/ ? 'amd64' : 'i686'}/cm"
   default[:scm][:aptrelease] = "#{node['lsb']['codename']}-cm4"
-  detault[:scm][:aptrepos] = " contrib"
+  default[:scm][:aptrepos] = " contrib"
   default[:scm][:archive_key] = "#{node[:scm][:reposerver]}#{node[:scm][:aptpath]}/archive.key"
 else
   Chef::Log.error("Unknown Platform Family [#{node['platform']}]")

@@ -33,11 +33,6 @@ template "/etc/default/cloudera-scm-server" do
   notifies :restart, "service[cloudera-scm-server]"
 end
 
-service "cloudera-scm-server" do
-  supports :status => true, :restart => true, :reload => true
-  action [ :enable, :start ]
-end
-
 package "cloudera-manager-server-db" do
   action :install
 end
@@ -49,6 +44,11 @@ execute "cloudera-manager-server-db" do
 end
 
 service "cloudera-scm-server-db" do
+  supports :status => true, :restart => true, :reload => true
+  action [ :enable, :start ]
+end
+
+service "cloudera-scm-server" do
   supports :status => true, :restart => true, :reload => true
   action [ :enable, :start ]
 end

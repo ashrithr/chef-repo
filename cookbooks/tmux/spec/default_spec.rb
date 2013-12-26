@@ -8,7 +8,7 @@ describe 'tmux::default' do
     # ChefSpec::ChefRunner.new.converge('tmux::default')
 
     # or converge a new node with platform using fauxhai
-    ChefSpec::ChefRunner.new(platform: 'ubuntu', version: '12.04').converge('tmux::default')
+    ChefSpec::ChefRunner.new(:platform => 'ubuntu', :version => '12.04').converge('tmux::default')
   }
 
   it 'installs the tmux package' do

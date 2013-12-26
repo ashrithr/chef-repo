@@ -20,9 +20,10 @@ case node['platform']
 when "ubuntu"
   apt_repository "cloudera-manager" do
     # deb [arch=amd64] http://archive.cloudera.com/cdh4/ubuntu/lucid/amd64/cm lucid-cm4 contrib      
-    uri "#{node[:scm][:reposerver]}#{node[:scm][:aptpath]}"
+    uri "[arch=#{node['kernel']['machine']  =~ /x86_64/ ? 'amd64' : 'i686'}] #{node[:scm][:reposerver]}#{node[:scm][:aptpath]}"
     distribution node[:scm][:aptrelease]
     components ["contrib"]
+    deb_src true
     key node[:scm][:archive_key]
     action :add
   end

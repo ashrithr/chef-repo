@@ -47,6 +47,6 @@ node[:users].each do |name, conf|
   template "#{home_dir}/.ssh/authorized_keys" do
     owner name
     mode 0600
-    variables keys: conf[:ssh_keys]
+    variables :keys => conf[:ssh_keys]
   end
 end

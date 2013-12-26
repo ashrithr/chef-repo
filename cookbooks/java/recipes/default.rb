@@ -24,7 +24,7 @@ directory node[:java][:base_dir] do
   action :create
 end
 
-cookbook_file "#{node[:java][:base_dir]/node[:java][:tarball]}" do
+cookbook_file "#{node[:java][:base_dir]}/#{node[:java][:tarball]}" do
   source node[:java][:tarball]
   mode 0755
   owner 'root'
