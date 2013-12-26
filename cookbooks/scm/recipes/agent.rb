@@ -38,7 +38,7 @@ template "/etc/default/cloudera-scm-agent" do
 end
 
 # find the scm server
-scm_server = search(:node, 'recipe:scm::server')
+scm_server = search(:node, 'recipes:scm\:\:server')
 
 template "/etc/cloudera-scm-agent/config.ini" do
   source "scm-config.ini.erb"
