@@ -22,10 +22,10 @@ default[:scm][:version] = '4'
 default[:scm][:reposerver] = 'http://archive.cloudera.com'
 case node['platform']
 when "redhat","centos"
-  default[:scm][:yumpath] = "/cm4/redhat/#{node['platform_version']}/#{node['kernel']['machine']}/cm/"
+  default[:scm][:yumpath] = "/cm#{node[:scm][:version]}/redhat/#{node['platform_version']}/#{node['kernel']['machine']}/cm/#{node[:scm][:version]}"
 when "ubuntu"
-  default[:scm][:aptpath] = "/cm4/ubuntu/#{node['lsb']['codename']}/#{node['kernel']['machine']  =~ /x86_64/ ? 'amd64' : 'i686'}/cm"
-  default[:scm][:aptrelease] = "#{node['lsb']['codename']}-cm4"
+  default[:scm][:aptpath] = "/cm#{node[:scm][:version]}/ubuntu/#{node['lsb']['codename']}/#{node['kernel']['machine']  =~ /x86_64/ ? 'amd64' : 'i686'}/cm"
+  default[:scm][:aptrelease] = "#{node['lsb']['codename']}-cm#{node[:scm][:version]}"
   default[:scm][:aptrepos] = " contrib"
   default[:scm][:archive_key] = "#{node[:scm][:reposerver]}#{node[:scm][:aptpath]}/archive.key"
 else
